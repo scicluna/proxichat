@@ -12,6 +12,12 @@ const UserSchema = new Schema({
     },
     image: {
         type: String
+    },
+    latitude: {
+        type: String
+    },
+    longitude: {
+        type: String
     }
 });
 
