@@ -1,0 +1,5 @@
+1. Delete Boilerplate - DONE
+2. Set up Models
+3. Set up connect to db util functions
+4. Next Auth Setup
+5. Provider Setup - DONE
