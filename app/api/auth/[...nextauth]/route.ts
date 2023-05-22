@@ -6,7 +6,7 @@ import User from "@/models/User";
 //add id to Session
 declare module "next-auth" {
     interface Session {
-        user: {
+        user?: {
             name?: string | null
             email?: string | null
             image?: string | null

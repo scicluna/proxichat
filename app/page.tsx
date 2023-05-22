@@ -1,8 +1,8 @@
 
 
 
-export default function MainPage() {
+export default function LoginPage() {
     return (
-        <h1>Proxichat</h1>
+        <h1>Login</h1>
     )
 }

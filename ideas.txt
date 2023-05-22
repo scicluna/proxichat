@@ -1,5 +1,5 @@
 1. Delete Boilerplate - DONE
-2. Set up Models
-3. Set up connect to db util functions
-4. Next Auth Setup
+2. Set up Models - 1/2 done
+3. Set up connect to db util functions - DONE
+4. Next Auth Setup - mostly Done, will create navbar and signin next.
 5. Provider Setup - DONE

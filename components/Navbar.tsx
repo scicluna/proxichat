@@ -1,5 +1,17 @@
+'use client'
+import { useSession } from "next-auth/react"
+
+
 export default function Navbar() {
+    const { data: session } = useSession()
+
     return (
-        <h1>Navbar</h1>
+        <>
+            {session && (
+                <nav>
+                    <h1>navbar</h1>
+                </nav>
+            )}
+        </>
     )
 }
