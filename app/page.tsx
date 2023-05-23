@@ -1,5 +1,5 @@
 'use client'
-import { BuiltInProviderType, BuiltInProviders } from "next-auth/providers"
+import { BuiltInProviderType } from "next-auth/providers"
 import { signIn, useSession, getProviders, LiteralUnion, ClientSafeProvider } from "next-auth/react"
 import { useState, useEffect } from "react"
 
@@ -14,8 +14,6 @@ export default function LoginPage() {
         }
         setUpProviders()
     }, [])
-
-    console.log(session)
 
     return (
         <>

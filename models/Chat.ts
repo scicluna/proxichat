@@ -6,10 +6,10 @@ const ChatSchema = new Schema({
         ref: 'User'
     },
     latitude: {
-        type: String
+        type: Number
     },
     longitude: {
-        type: String
+        type: Number
     },
     chatbody: {
         type: String
