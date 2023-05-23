@@ -1,15 +1,37 @@
 'use client'
+import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 
-const useGeolocation = () => {
-    const [location, setLocation] = useState<{} | null>(null);
-    const [error, setError] = useState<String | null>(null);
+export type Location = {
+    latitude: number
+    longitude: number
+}
 
-    const handleSuccess = (position: GeolocationPosition) => {
+const useGeolocation = () => {
+    const [location, setLocation] = useState<Location | null>(null);
+    const [error, setError] = useState<String | null>(null);
+    const { data: session } = useSession()
+
+    const handleSuccess = async (position: GeolocationPosition) => {
         setLocation({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         });
+
+        console.log(session)
+        if (session) {
+            const response = await fetch('/api/user/location', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: session.user?.email, location })
+            })
+
+            if (!response.ok) {
+                console.error('Failed to update location')
+            }
+        }
     };
 
     const handleError = () => {
@@ -28,7 +50,7 @@ const useGeolocation = () => {
         } else {
             navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
         }
-    }, []);
+    }, [session]);
 
     return { location, error };
 };
