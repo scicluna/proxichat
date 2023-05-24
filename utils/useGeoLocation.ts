@@ -18,7 +18,6 @@ const useGeolocation = () => {
             longitude: position.coords.longitude
         });
 
-        console.log(session)
         if (session) {
             const response = await fetch('/api/user/location', {
                 method: 'POST',
