@@ -7,7 +7,7 @@ export default function Navbar() {
     return (
         <>
             {session && (
-                <nav>
+                <nav className="h-12 m-2">
                     <button type="button" onClick={() => signOut({ callbackUrl: "/" })}
                         className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all 
                         hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center">

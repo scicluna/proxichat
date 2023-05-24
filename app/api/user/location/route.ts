@@ -1,21 +1,15 @@
 import { connectToDB } from "@/utils/database"
 import User from "@/models/User"
-import { Location } from "@/utils/useGeoLocation"
-import { NextApiRequest } from "next"
-import { parse } from "path"
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
     const parsedReq = await req.json()
     const { email, location } = parsedReq
 
     try {
-        console.log(email)
         await connectToDB()
         const user = await User.findOne({
             email: email
         })
-
-        console.log(user)
 
         user.latitude = location.latitude
         user.longitude = location.longitude
