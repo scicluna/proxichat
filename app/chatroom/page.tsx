@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import ChatFeed from "@/components/ChatFeed";
 import ChatBar from "@/components/ChatBar";
+import RangeSlider from "@/components/RangeSlider";
 
 export default function ChatRoom() {
     const { data: session } = useSession();
@@ -16,6 +17,7 @@ export default function ChatRoom() {
     return (
         <>
             <Navbar />
+            <RangeSlider range={range} setRange={setRange} />
             <ChatFeed />
             <ChatBar />
         </>
