@@ -2,15 +2,12 @@ import { connectToDB } from "@/utils/database";
 import Chat from "@/models/Chat";
 import getAcceptableRanges from "@/utils/getAcceptableRanges";
 
-export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url)
-    const userRange = parseInt(searchParams.get('range')!)
-    const userLatitude = parseInt(searchParams.get('latitude')!)
-    const userLongitude = parseInt(searchParams.get('longitude')!)
+export async function GET(request: Request, { params }: any) {
+    const { range, latitude, longitude } = params
 
     try {
         await connectToDB()
-        const geoRanges = getAcceptableRanges(userRange, userLatitude, userLongitude)
+        const geoRanges = getAcceptableRanges(parseFloat(range), parseFloat(latitude), parseFloat(longitude))
 
         const rangeChat = await Chat.find({
             latitude: { $gte: geoRanges.minLatitude, $lt: geoRanges.maxLatitude },

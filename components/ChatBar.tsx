@@ -1,15 +1,32 @@
 'use client'
 import { useState } from "react"
 import { useSession } from "next-auth/react"
+import { Location } from "@/utils/useGeoLocation"
 
-export default function ChatBar() {
+type ChatBarProps = {
+    location: Location
+}
+
+export default function ChatBar({ location }: ChatBarProps) {
     const [text, setText] = useState<string>('')
     const { data: session } = useSession()
 
-    function submitChat(e: React.MouseEvent<HTMLButtonElement>) {
+    async function submitChat(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
 
-        //Post Request here using text and session details
+        //Post Request here using text and session details and location
+        const response = await fetch('/api/chats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ session, location, text })
+        })
+
+        if (!response.ok) {
+            console.error('Failed to chat')
+        }
+
         //Cool! Then some way to signal the chat feed (WS or whatever)
 
         setText('')
