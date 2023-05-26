@@ -1,6 +1,4 @@
 export default function getAcceptableRanges(range: number, lat: number, lon: number) {
-    console.log(range, lat, lon)
-
     const R = 3958.8; // Earth's radius in miles
 
     // Change in coordinates

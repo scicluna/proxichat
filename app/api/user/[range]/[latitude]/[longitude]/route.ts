@@ -17,7 +17,9 @@ export async function GET(request: Request, { params }: any) {
         if (!users) return new Response("No chats found for this range", { status: 404 })
 
         console.log(users)
-        return new Response(JSON.stringify(users), { status: 200 })
+        const onlineUsers = users.filter(user => user.online == true)
+
+        return new Response(JSON.stringify(onlineUsers), { status: 200 })
     } catch (err) {
         return new Response('Failed to fetch chats', { status: 500 })
     }

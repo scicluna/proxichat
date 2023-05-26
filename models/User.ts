@@ -18,6 +18,9 @@ const UserSchema = new Schema({
     },
     longitude: {
         type: Number
+    },
+    online: {
+        type: Boolean
     }
 });
 

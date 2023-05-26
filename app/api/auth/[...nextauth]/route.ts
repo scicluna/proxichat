@@ -11,6 +11,7 @@ declare module "next-auth" {
             email?: string | null
             image?: string | null
             id?: string | null
+            online?: boolean | null
         };
     }
 }
@@ -46,7 +47,8 @@ const handler = NextAuth({
                     await User.create({
                         email: profile!.email,
                         username: profile!.name?.replace(" ", "").toLowerCase(),
-                        image: profile!.image
+                        image: profile!.image,
+                        online: true
                     })
                 }
                 return true;

@@ -3,17 +3,16 @@ import User from "@/models/User"
 
 export async function POST(req: Request) {
     const parsedReq = await req.json()
-    const { email, location } = parsedReq
+    const { session } = parsedReq
 
+    console.log(session)
     try {
         await connectToDB()
         const user = await User.findOne({
-            email: email
+            email: session.user.email
         })
 
-        user.latitude = location.latitude
-        user.longitude = location.longitude
-        user.online = true
+        user.online = false
         await user.save()
         return new Response(JSON.stringify(user), { status: 200 })
     } catch (err) {
