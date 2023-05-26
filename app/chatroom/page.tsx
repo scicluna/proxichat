@@ -17,7 +17,7 @@ export default function ChatRoom() {
 
     return (
         <>
-            <Navbar />
+            <Navbar session={session} />
             <RangeSlider range={range} setRange={setRange} />
             <ChatFeed range={range} location={location} />
             <ChatBar location={location} />
