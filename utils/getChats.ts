@@ -24,14 +24,28 @@ export default function getChats(range: number, location: Location) {
     }
 
     useEffect(() => {
-        async function chatFetch() {
-            if (session && location && range) {
-                await fetchChats()
-            } else {
-                setError('Unable to retrieve messages')
+        let timeoutId: NodeJS.Timeout | null = null
+
+        const fetchWithDelay = () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId)
             }
+            timeoutId = setTimeout(() => {
+                fetchChats()
+            }, 500)
         }
-        chatFetch()
+        if (session && location && range) {
+            fetchWithDelay()
+        } else {
+            setError('Unable to retrieve messages')
+        }
+
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+
     }, [range, location])
 
     return { chats, error }

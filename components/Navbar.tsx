@@ -9,8 +9,10 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="h-12 m-2 flex justify-between">
-                <h1>logo</h1>
+            <nav className="h-12 p-1 flex justify-between bg-gray-300 bg-opacity-70">
+                <div className="flex">
+                    <Image src='/assets/images/logo.webp' width={37} height={37} alt="logo" />
+                </div>
                 {session?.user && (
                     <div className="flex">
                         <Image src={session.user.image!} width={37} height={37}
