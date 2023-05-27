@@ -36,9 +36,9 @@ export default function ChatBar({ range, location, setMessageCount }: ChatBarPro
     }
 
     return (
-        <section className="mt-auto m-2">
+        <section className="mt-auto p-1 shadow-sm shadow-gray-300">
             <form className="relative">
-                <input type="text" value={text} onChange={e => setText(e.target.value)} className="w-full shadow-inner p-1 bg-gray-300 bg-opacity-80" placeholder="Type..." />
+                <input type="text" value={text} onChange={e => setText(e.target.value)} className="w-full shadow-md shadow-gray-400 p-1 bg-gray-100 bg-opacity-80" placeholder="Type..." />
                 <button type="submit" onClick={submitChat} className="absolute p-0 right-1 bottom-1 text-gray-400 hover:text-gray-900 w-5">{'>'}</button>
             </form>
         </section>

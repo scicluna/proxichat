@@ -1,5 +1,20 @@
 1. Delete Boilerplate - DONE
-2. Set up Models - 1/2 done
+2. Set up Models - - DONE
 3. Set up connect to db util functions - DONE
-4. Next Auth Setup - mostly Done, will create navbar and signin next.
+4. Next Auth Setup - DONE
 5. Provider Setup - DONE
+6. Login/Logout - DONE
+7. Main Pages Complete - ALPHA
+8. Rangebar - DONE
+9. ChatFeed - DONE
+10. ChatBar - DONE
+11. Navbar - DONE
+12. Basic Polling - DONE
+13. User location tracking - DONE
+14. Proximity Bounding Box for chatting - DONE
+15. Personal Settings
+16. Styling Beta - DONE
+17. Desktop Styling
+18. Deployment (vercel?)
+19. Actual mobile phone testing
+20. Polish Phase 1

@@ -3,8 +3,18 @@ import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { Location } from './useGeoLocation';
 
+export type Author = {
+    _id: string
+    username: string
+    image: string
+    latitude: number
+    longitude: number
+    online: Boolean
+}
+
+
 export type Chat = {
-    author: string
+    author: Author
     latitude: number
     longitude: number
     chatbody: string

@@ -12,7 +12,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <html lang='en'>
             <body>
                 <Provider>
-                    <main className="h-screen flex flex-col">
+                    <main className="h-screen flex flex-col bg-gray-200">
                         {children}
                     </main>
                 </Provider>
