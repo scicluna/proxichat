@@ -1,16 +1,16 @@
 'use client'
-import getChats from "@/utils/getChats"
+import { useChatPolling } from "@/utils/useChatPolling"
 import { Location } from "@/utils/useGeoLocation"
 import { useEffect } from "react"
 
 type ChatFeedProps = {
     range: number
     location: Location
+    messageCount: number
 }
 
-
-export default function ChatFeed({ range, location }: ChatFeedProps) {
-    const { chats, error } = getChats(range, location);
+export default function ChatFeed({ range, location, messageCount }: ChatFeedProps) {
+    const { chats, error } = useChatPolling(range, location, messageCount);
 
     return (
         <section className="h-full overflow-y-scroll m-2">

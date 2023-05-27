@@ -11,6 +11,7 @@ import RangeSlider from "@/components/RangeSlider";
 export default function ChatRoom() {
     const { data: session } = useSession();
     const { location, error } = useGeolocation();
+    const [messageCount, setMessageCount] = useState<number>(0)
     const [range, setRange] = useState<number>(5);
     const { userCount } = useUserCount(range, location);
 
@@ -20,8 +21,8 @@ export default function ChatRoom() {
         <>
             <Navbar />
             <RangeSlider range={range} setRange={setRange} userCount={userCount} />
-            <ChatFeed range={range} location={location} />
-            <ChatBar location={location} />
+            <ChatFeed range={range} location={location} messageCount={messageCount} />
+            <ChatBar range={range} location={location} setMessageCount={setMessageCount} />
         </>
     )
 }

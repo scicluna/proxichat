@@ -1,13 +1,15 @@
 'use client'
-import { useState } from "react"
+import { useState, SetStateAction } from "react"
 import { useSession } from "next-auth/react"
 import { Location } from "@/utils/useGeoLocation"
 
 type ChatBarProps = {
+    range: number
     location: Location
+    setMessageCount: React.Dispatch<SetStateAction<number>>
 }
 
-export default function ChatBar({ location }: ChatBarProps) {
+export default function ChatBar({ range, location, setMessageCount }: ChatBarProps) {
     const [text, setText] = useState<string>('')
     const { data: session } = useSession()
 
@@ -27,6 +29,7 @@ export default function ChatBar({ location }: ChatBarProps) {
             console.error('Failed to chat')
         }
 
+        setMessageCount(prev => prev + 1)
         //Cool! Then some way to signal the chat feed (WS or whatever)
 
         setText('')
