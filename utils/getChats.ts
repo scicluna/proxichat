@@ -12,7 +12,6 @@ export type Author = {
     online: Boolean
 }
 
-
 export type Chat = {
     author: Author
     latitude: number

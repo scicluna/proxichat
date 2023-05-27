@@ -11,10 +11,18 @@ type ChatFeedProps = {
 
 export default function ChatFeed({ range, location, messageCount }: ChatFeedProps) {
     const [newMessage, setNewMessage] = useState(false)
+    const [loading, setLoading] = useState(true)
     const { chats } = useChatPolling(range, location, messageCount);
     const chatContainer = useRef<HTMLDivElement>(null)
     const lastMessage = useRef<HTMLDivElement>(null)
     const chatCount = useRef(0)
+
+    useEffect(() => {
+        setTimeout(() => {
+            scrollToBottom()
+        }, 100)
+    }, [loading])
+
 
     useEffect(() => {
         if (!chatContainer.current || !chats) return;
@@ -31,6 +39,10 @@ export default function ChatFeed({ range, location, messageCount }: ChatFeedProp
             chatCount.current = chats.length
         } else {
             chatCount.current = chats.length
+        }
+
+        if (loading) {
+            setLoading(false)
         }
     }, [chats]);
 
