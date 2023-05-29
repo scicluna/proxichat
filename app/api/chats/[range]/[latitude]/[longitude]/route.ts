@@ -9,6 +9,9 @@ export async function GET(request: Request, { params }: any) {
         await connectToDB()
         const geoRanges = getAcceptableRanges(parseFloat(range), parseFloat(latitude), parseFloat(longitude))
 
+        console.log(latitude, longitude)
+        console.log(geoRanges)
+
         const rangeChat = await Chat.find({
             latitude: { $gte: geoRanges.minLatitude, $lt: geoRanges.maxLatitude },
             longitude: { $gte: geoRanges.minLongitude, $lt: geoRanges.maxLongitude }

@@ -3,7 +3,7 @@ export default function getAcceptableRanges(range: number, lat: number, lon: num
 
     // Change in coordinates
     let deltaLat = range / R;
-    let deltaLon = range / (R * Math.cos(Math.PI * lat / 180));
+    let deltaLon = range / (R * Math.cos((Math.PI * (lat + deltaLat)) / 180)); //longitude is wrong
 
 
     // Minimum and maximum latitudes for bounding box
