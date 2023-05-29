@@ -5,7 +5,6 @@ export async function POST(req: Request) {
     const parsedReq = await req.json()
     const { session } = parsedReq
 
-    console.log(session)
     try {
         await connectToDB()
         const user = await User.findOne({

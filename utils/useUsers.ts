@@ -28,7 +28,7 @@ export function useUserCount(range: number, location: Location | null) {
         if (location && range) {
             fetchWithDelay()
         } else {
-            setError('Unable to retrieve messages')
+            setError('Unable to retrieve users')
         }
 
         return () => {

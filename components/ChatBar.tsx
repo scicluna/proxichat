@@ -16,7 +16,7 @@ export default function ChatBar({ range, location, setMessageCount }: ChatBarPro
     async function submitChat(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
 
-        //Post Request here using text and session details and location
+        //post request to submit the new chat
         const response = await fetch('/api/chats', {
             method: 'POST',
             headers: {
@@ -29,8 +29,8 @@ export default function ChatBar({ range, location, setMessageCount }: ChatBarPro
             console.error('Failed to chat')
         }
 
+        //hack to refresh chats
         setMessageCount(prev => prev + 1)
-        //Cool! Then some way to signal the chat feed (WS or whatever)
 
         setText('')
     }

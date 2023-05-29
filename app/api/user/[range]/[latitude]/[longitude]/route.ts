@@ -14,13 +14,12 @@ export async function GET(request: Request, { params }: any) {
             longitude: { $gte: geoRanges.minLongitude, $lt: geoRanges.maxLongitude }
         })
 
-        if (!users) return new Response("No chats found for this range", { status: 404 })
+        if (!users) return new Response("No users found for this range", { status: 404 })
 
-        console.log(users)
         const onlineUsers = users.filter(user => user.online == true)
 
         return new Response(JSON.stringify(onlineUsers), { status: 200 })
     } catch (err) {
-        return new Response('Failed to fetch chats', { status: 500 })
+        return new Response('Failed to fetch users', { status: 500 })
     }
 }

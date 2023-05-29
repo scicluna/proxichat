@@ -13,7 +13,11 @@ export default function ChatRoom() {
     const [range, setRange] = useState<number>(5);
     const { userCount } = useUserCount(range, location);
 
-    if (!location) return <h1>Please activate location services to use Proxichat</h1>
+    if (!location) return (
+        <div className="h-full w-full flex justify-center items-center text-6xl mb-20 text-center">
+            <h1>Please activate location services to use Proxichat</h1>
+        </div>
+    )
 
     return (
         <>
