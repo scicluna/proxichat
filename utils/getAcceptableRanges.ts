@@ -1,10 +1,27 @@
 export default function getAcceptableRanges(range: number, lat: number, lon: number) {
     const R = 3958.8; // Earth's radius in miles
 
+    console.log(range)
+
+    let newRange: number
+    if (range == 0) {
+        newRange = 1
+    } else {
+        newRange = range
+    }
+
+    console.log(newRange, "new range")
+
+    // convert latitude into radians
+    let latR = lat * Math.PI / 180;
+
     // Change in coordinates
-    let deltaLat = range / R;
-    let deltaLon = range / (R * Math.cos((Math.PI * (lat + deltaLat)) / 180)); //longitude is wrong
-    ///HOW DO I DO THIS
+    let deltaLat = newRange / R;
+    let deltaLon = newRange / (R * Math.cos(latR));
+
+    // convert deltas back to degrees
+    deltaLat = deltaLat * 180 / Math.PI;
+    deltaLon = deltaLon * 180 / Math.PI;
 
     // Minimum and maximum latitudes for bounding box
     let minLat = lat - deltaLat;

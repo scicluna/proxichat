@@ -26,7 +26,7 @@ export function useChatPolling(range: number, location: Location, messageCount: 
     useEffect(() => {
         let cleanupFn: () => void = () => { };
 
-        if (session && location && range) {
+        if (session ?? location ?? range) {
             cleanupFn = startPolling();
         } else {
             setError('Unable to retrieve messages');
