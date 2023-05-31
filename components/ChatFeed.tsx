@@ -44,7 +44,7 @@ export default function ChatFeed({ range, location, messageCount }: ChatFeedProp
         if (loading) {
             setLoading(false)
         }
-    }, [chats]);
+    }, [chats, range]);
 
     function scrollToBottom() {
         if (lastMessage.current && chatContainer.current) {

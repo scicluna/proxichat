@@ -1,16 +1,12 @@
 export default function getAcceptableRanges(range: number, lat: number, lon: number) {
     const R = 3958.8; // Earth's radius in miles
 
-    console.log(range)
-
     let newRange: number
     if (range == 0) {
         newRange = 1
     } else {
         newRange = range
     }
-
-    console.log(newRange, "new range")
 
     // convert latitude into radians
     let latR = lat * Math.PI / 180;

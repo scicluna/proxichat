@@ -13,10 +13,13 @@ const useGeolocation = () => {
     const { data: session } = useSession()
 
     const handleSuccess = async (position: GeolocationPosition) => {
-        setLocation({
+
+        const newLocation: Location = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
-        });
+        }
+
+        setLocation(newLocation);
 
         if (session) {
             const response = await fetch('/api/user/location', {
@@ -24,7 +27,7 @@ const useGeolocation = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email: session.user?.email, location })
+                body: JSON.stringify({ email: session.user?.email, newLocation })
             })
 
             if (!response.ok) {

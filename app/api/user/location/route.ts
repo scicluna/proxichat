@@ -3,7 +3,7 @@ import User from "@/models/User"
 
 export async function POST(req: Request) {
     const parsedReq = await req.json()
-    const { email, location } = parsedReq
+    const { email, newLocation } = parsedReq
 
     try {
         await connectToDB()
@@ -11,8 +11,8 @@ export async function POST(req: Request) {
             email: email
         })
 
-        user.latitude = location.latitude
-        user.longitude = location.longitude
+        user.latitude = newLocation.latitude
+        user.longitude = newLocation.longitude
         user.online = true
         await user.save()
         return new Response(JSON.stringify(user), { status: 200 })
