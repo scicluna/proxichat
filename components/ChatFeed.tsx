@@ -2,6 +2,7 @@
 import { useChatPolling } from "@/utils/useChatPolling"
 import { Location } from "@/utils/useGeoLocation"
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 
 type ChatFeedProps = {
     range: number
@@ -60,7 +61,7 @@ export default function ChatFeed({ range, location, messageCount }: ChatFeedProp
         <section className="h-full overflow-y-scroll scrollbar-hide p-1 mx-1 shadow-md shadow-gray-300 bg-gray-100 relative" ref={chatContainer}>
             {chats && chats.map((chat, i) => (
                 <div key={i} ref={i === chats.length - 1 ? lastMessage : null}>
-                    <p><b>{chat?.author?.username || '---User Deleted---'}</b>: {chat.chatbody}</p>
+                    <Link href={`/profile/${chat?.author?._id}`}><b>{chat?.author?.username || '---User Deleted---'}</b>: {chat.chatbody}</Link>
                 </div>
             ))}
             <div className="fixed bottom-10 right-2">

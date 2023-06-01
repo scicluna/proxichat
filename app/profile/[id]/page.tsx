@@ -1,5 +1,10 @@
+import Navbar from "@/components/Navbar";
+
 export default function OtherProfile() {
     return (
-        <h1>Other Profile</h1>
+        <>
+            <Navbar />
+            <h1>Other Profile</h1>
+        </>
     )
 }

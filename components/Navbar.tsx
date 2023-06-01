@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react"
 import { useState } from "react"
 import Image from "next/image"
 import { signOutUser } from "@/utils/signOut"
+import Link from "next/link"
 
 export default function Navbar() {
     const { data: session } = useSession()
@@ -12,7 +13,9 @@ export default function Navbar() {
         <>
             <nav className="h-12 p-1 mx-1 flex justify-between bg-gray-200 shadow-md shadow-gray-300">
                 <div className="flex">
-                    <Image src='/assets/images/logo.webp' width={37} height={37} alt="logo" />
+                    <Link href={`/chatroom`}>
+                        <Image src='/assets/images/logo.webp' width={37} height={37} alt="logo" />
+                    </Link>
                 </div>
                 {session?.user && (
                     <div className="flex">
@@ -20,7 +23,7 @@ export default function Navbar() {
                             className="rounded-full hover:cursor-pointer" alt="profile" onClick={e => setDropDown(prev => !prev)} />
                         {dropDown && (
                             <div className='absolute z-10 right-2 top-8 mt-5 p-2 rounded-lg shadow-lg shadow-gray-300 bg-gray-200 outline-2 min-w-[120px] flex flex-col gap-1 justify-end items-end'>
-                                <h1 className="text-gray-400">Profile</h1>
+                                <Link href="/profile" className="hover:text-gray-400">Profile</Link>
                                 <button type="button" onClick={() => {
                                     setDropDown(false)
                                     signOutUser(session)

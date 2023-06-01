@@ -20,3 +20,6 @@
 20. Polish Phase 1
 21. User Profile
 22. FriendsList
+23. More responsive texts (when i send a text, i dont want to wait for a fetch. i want instant update)
+24. Lat/Lon fixed - DONE
+25. Debouncing fixed - DONE

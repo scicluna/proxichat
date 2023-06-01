@@ -22,6 +22,7 @@ export default function LoginPage() {
                 <h1 className="text-4xl">ProxiChat</h1>
                 <Image src='/assets/images/logo.webp' width={37} height={37} alt="logo" />
             </div>
+
             {(providers && !session) ?
                 Object.values(providers).map((provider) => (
                     <button type="button" key={provider.name} onClick={() => signIn(provider.id, { callbackUrl: "/chatroom" })}
@@ -29,14 +30,8 @@ export default function LoginPage() {
                         hover:bg-white hover:text-black text-center flex items-center justify-center text-5xl">
                         Sign In
                     </button>
-                )) : (
-                    <button type="button"
-                        className="rounded-full border border-black bg-black py-5 px-5 text-white transition-all 
-                    hover:bg-white hover:text-black text-center flex items-center justify-center text-5xl">
-                        Sign In
-                    </button>
-                )
-            }
+                )) : <h1 className="rounded-full py-5 px-5 border-transparent border
+                hover:bg-white hover:text-black text-center flex items-center justify-center text-5xl">Loading...</h1>}
         </div>
     )
 }
