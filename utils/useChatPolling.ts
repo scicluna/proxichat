@@ -47,7 +47,7 @@ export function useChatPolling(range: number, location: Location, messageCount: 
                     clearInterval(interval)
                 }
                 interval = setInterval(fetchChats, 5000) // Poll every 5 seconds
-            }, 500)
+            }, 100)
         }
 
         fetchChatsDebounced()
