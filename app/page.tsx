@@ -1,6 +1,6 @@
 'use client'
 import { BuiltInProviderType } from "next-auth/providers"
-import { signIn, useSession, getProviders, LiteralUnion, ClientSafeProvider } from "next-auth/react"
+import { signIn, signOut, useSession, getProviders, LiteralUnion, ClientSafeProvider } from "next-auth/react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 
@@ -13,8 +13,14 @@ export default function LoginPage() {
             const response = await getProviders();
             setProviders(response)
         }
+        if (session) {
+            signOut()
+        }
         setUpProviders()
     }, [])
+
+
+
 
     return (
         <div className="flex flex-col gap-10 w-full h-full justify-center items-center pb-10 bg-gray-200">

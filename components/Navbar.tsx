@@ -1,20 +1,24 @@
 'use client'
 import { useSession } from "next-auth/react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { signOutUser } from "@/utils/signOut"
 import Link from "next/link"
-import { useRouter } from "next/router"
+import { redirect } from 'next/navigation'
 
 export default function Navbar() {
     const { data: session } = useSession()
     const [dropDown, setDropDown] = useState(false)
-    const router = useRouter()
+    const [loading, setLoading] = useState(true)
 
-
-    if (!session) {
-        router.push('/')
-    }
+    useEffect(() => {
+        if (!session && !loading) {
+            return redirect('/')
+        }
+        setTimeout(() => {
+            setLoading(false)
+        }, 250)
+    }, [loading])
 
     return (
         <>
