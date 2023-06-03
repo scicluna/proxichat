@@ -4,10 +4,17 @@ import { useState } from "react"
 import Image from "next/image"
 import { signOutUser } from "@/utils/signOut"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 export default function Navbar() {
     const { data: session } = useSession()
     const [dropDown, setDropDown] = useState(false)
+    const router = useRouter()
+
+
+    if (!session) {
+        router.push('/')
+    }
 
     return (
         <>
