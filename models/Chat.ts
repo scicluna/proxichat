@@ -13,6 +13,9 @@ const ChatSchema = new Schema({
     },
     chatbody: {
         type: String
+    },
+    tempId: {
+        type: String
     }
 },
     {

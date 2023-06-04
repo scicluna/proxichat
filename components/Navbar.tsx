@@ -16,7 +16,15 @@ export default function Navbar() {
     const [dropDown, setDropDown] = useState(false)
 
     if (status === "loading") {
-        return <h1>"Loading..."</h1>
+        return (
+            <nav className="h-12 p-1 mx-1 flex justify-between bg-gray-200 shadow-md shadow-gray-300">
+                <h1>"Loading..."</h1>
+            </nav>
+        )
+    }
+
+    if (!session) {
+        return redirect('/')
     }
 
     return (

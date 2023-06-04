@@ -1,7 +1,6 @@
 'use client'
 import Navbar from "@/components/Navbar";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 type OtherProfileProps = {
     params: {
@@ -46,7 +45,7 @@ export default function OtherProfile({ params }: OtherProfileProps) {
                 {loading ? (
                     <h1>Loading...</h1>
                 ) : (
-                    <h1>{user?.username}'s Profile</h1 >
+                    <h1>{user ? `${user?.username}'s Profile` : 'loading...'}</h1 >
                 )
                 }
             </section>

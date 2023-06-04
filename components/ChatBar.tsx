@@ -1,20 +1,40 @@
 'use client'
-import { useState, SetStateAction } from "react"
+import { useState } from "react"
 import { useSession } from "next-auth/react"
 import { Location } from "@/utils/useGeoLocation"
+import { Chat } from "@/utils/useChatPolling"
+import { v4 as uuidv4 } from 'uuid'
 
 type ChatBarProps = {
     range: number
     location: Location
-    setMessageCount: React.Dispatch<SetStateAction<number>>
+    displayChats: (chat: Chat) => void
 }
 
-export default function ChatBar({ range, location, setMessageCount }: ChatBarProps) {
+export default function ChatBar({ range, location, displayChats }: ChatBarProps) {
     const [text, setText] = useState<string>('')
     const { data: session } = useSession()
 
     async function submitChat(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
+
+        if (!text) return
+
+        const tempId = uuidv4()
+        // Create a new chat message
+        const newChat: Chat = {
+            tempId: tempId,
+            author: { _id: session!.user!.id!, username: session!.user!.name!, image: session!.user!.image!, latitude: location.latitude, longitude: location.longitude, online: true },
+            latitude: location.latitude,
+            longitude: location.longitude,
+            chatbody: text,
+            created_at: new Date(),
+            updated_at: new Date()
+        };
+
+        // Add the new chat message to local state
+        displayChats(newChat)
+        setText('')
 
         //post request to submit the new chat
         const response = await fetch('/api/chats', {
@@ -22,17 +42,13 @@ export default function ChatBar({ range, location, setMessageCount }: ChatBarPro
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ session, location, text })
+            body: JSON.stringify({ session, location, text, tempId })
         })
 
         if (!response.ok) {
             console.error('Failed to chat')
         }
 
-        //hack to refresh chats
-        setMessageCount(prev => prev + 1)
-
-        setText('')
     }
 
     return (

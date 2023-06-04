@@ -1,5 +1,5 @@
 'use client'
-import { useChatPolling } from "@/utils/useChatPolling"
+import { Chat } from "@/utils/useChatPolling"
 import { Location } from "@/utils/useGeoLocation"
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
@@ -7,20 +7,22 @@ import Link from "next/link"
 type ChatFeedProps = {
     range: number
     location: Location
-    messageCount: number
+    chats: Chat[]
 }
 
-export default function ChatFeed({ range, location, messageCount }: ChatFeedProps) {
+export default function ChatFeed({ range, location, chats }: ChatFeedProps) {
     const [newMessage, setNewMessage] = useState(false)
     const [loading, setLoading] = useState(true)
-    const { chats } = useChatPolling(range, location, messageCount);
     const chatContainer = useRef<HTMLDivElement>(null)
     const lastMessage = useRef<HTMLDivElement>(null)
     const chatCount = useRef(0)
 
     useEffect(() => {
-        setTimeout(() => {
+        let scroller = setInterval(() => {
             scrollToBottom()
+            if (lastMessage.current) {
+                clearInterval(scroller)
+            }
         }, 100)
     }, [loading])
 
@@ -30,7 +32,7 @@ export default function ChatFeed({ range, location, messageCount }: ChatFeedProp
 
         const { scrollTop, scrollHeight, clientHeight } = chatContainer.current;
         const diff = scrollHeight - (scrollTop + clientHeight);
-        const threshold = 30;
+        const threshold = 50;
         const isAtBottom = diff <= threshold;
 
         if (isAtBottom) {

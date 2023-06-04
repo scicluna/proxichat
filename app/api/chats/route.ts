@@ -3,11 +3,12 @@ import Chat from "@/models/Chat";
 
 export async function POST(req: Request) {
     const parsedReq = await req.json()
-    const { session, text, location } = parsedReq
+    const { session, text, location, tempId } = parsedReq
 
     try {
         await connectToDB()
         const response = await Chat.create({
+            tempId: tempId,
             author: session.user.id,
             latitude: location.latitude,
             longitude: location.longitude,

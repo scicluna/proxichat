@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { Location } from './useGeoLocation';
 
@@ -13,6 +13,7 @@ export type Author = {
 }
 
 export type Chat = {
+    tempId: string
     author: Author
     latitude: number
     longitude: number
@@ -21,15 +22,28 @@ export type Chat = {
     updated_at: Date
 }
 
-export function useChatPolling(range: number, location: Location, messageCount: number) {
-    const [chats, setChats] = useState<Chat[] | null>(null);
+export function useChatPolling(range: number, location: Location) {
+    const [chats, setChats] = useState<Chat[] | null>([]);
+    const [firstLoad, setFirstLoad] = useState(true)
     const [error, setError] = useState<String | null>(null);
     const { data: session } = useSession();
+    const [pendingChats, setPendingChats] = useState<Chat[] | null>([])
 
     async function fetchChats() {
         const response = await fetch(`/api/chats/${range}/${location.latitude}/${location.longitude}`);
         const processedChats = await response.json();
-        setChats(processedChats);
+
+        if (pendingChats) {
+            const newChats = processedChats.filter((chat: Chat) => !pendingChats.some(pendingChat => pendingChat.tempId === chat.tempId))
+            setChats([...pendingChats, ...newChats]);
+        } else {
+            setChats(processedChats)
+        }
+    }
+
+    function changeChats(chats: Chat[]) {
+        setChats(chats)
+        setPendingChats(chats)
     }
 
     function startPolling() {
@@ -40,14 +54,21 @@ export function useChatPolling(range: number, location: Location, messageCount: 
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
+
+            if (firstLoad && location) {
+                fetchChats()
+                setFirstLoad(false)
+            }
+
+            if (interval) {
+                clearInterval(interval)
+            }
+
             timeoutId = setTimeout(() => {
                 fetchChats()
                 // Restart the interval after the debounced fetchChats call
-                if (interval) {
-                    clearInterval(interval)
-                }
                 interval = setInterval(fetchChats, 5000) // Poll every 5 seconds
-            }, 100)
+            }, 5000)
         }
 
         fetchChatsDebounced()
@@ -67,8 +88,7 @@ export function useChatPolling(range: number, location: Location, messageCount: 
     useEffect(() => {
         const stopPolling = startPolling()
         return stopPolling
-    }, [range, location, session, messageCount])
+    }, [range, location, session, chats?.length])
 
-
-    return { chats, setChats, error };
+    return { chats, changeChats, error };
 }
