@@ -61,7 +61,15 @@ export default function ChatFeed({ range, location, messageCount }: ChatFeedProp
         <section className="h-full overflow-y-scroll scrollbar-hide p-1 mx-1 shadow-md shadow-gray-300 bg-gray-100 relative" ref={chatContainer}>
             {chats && chats.map((chat, i) => (
                 <div key={i} ref={i === chats.length - 1 ? lastMessage : null}>
-                    <Link href={`/profile/${chat?.author?._id}`}><b>{chat?.author?.username || '---User Deleted---'}</b>: {chat.chatbody}</Link>
+                    {chat?.author?.username
+                        ?
+                        <Link href={`/profile/${chat?.author?._id}`}><b>{chat?.author?.username || '---User Deleted---'}</b>: {chat.chatbody}</Link>
+                        :
+                        <>
+                            <b>---User Deleted---</b> {chat.chatbody}
+                        </>
+                    }
+
                 </div>
             ))}
             <div className="fixed bottom-10 right-2">
