@@ -1,31 +1,27 @@
-export default function getAcceptableRanges(range: number, lat: number, lon: number) {
-    const R = 3958.8; // Earth's radius in miles
+import * as turf from '@turf/turf';
 
-    let newRange: number
+// This function will return a bounding box around a point
+export default function getAcceptableRanges(range: number, lat: number, lon: number) {
+
+    let newRange: number;
     if (range == 0) {
         newRange = 1
-    } else {
-        newRange = range
-    }
+    } else newRange = range
 
-    // convert latitude into radians
-    let latR = lat * Math.PI / 180;
+    // Create the point from your longitude and latitude
+    const center = turf.point([lon, lat]);
 
-    // Change in coordinates
-    let deltaLat = newRange / R;
-    let deltaLon = newRange / (R * Math.cos(latR));
+    // Convert range to kilo
+    const kiloRange = newRange * 1.609344
 
-    // convert deltas back to degrees
-    deltaLat = deltaLat * 180 / Math.PI;
-    deltaLon = deltaLon * 180 / Math.PI;
+    // Create a circular polygon around the point with the specified range.
+    const circle = turf.circle(center, kiloRange, { units: 'kilometers' });
 
-    // Minimum and maximum latitudes for bounding box
-    let minLat = lat - deltaLat;
-    let maxLat = lat + deltaLat;
+    // Now get the bounding box of that circle, this will return an array [minX, minY, maxX, maxY]
+    // which is equivalent to [minLon, minLat, maxLon, maxLat]
+    const boundingBox = turf.bbox(circle);
 
-    // Minimum and maximum longitudes for bounding box
-    let minLon = lon - deltaLon;
-    let maxLon = lon + deltaLon;
-
-    return { minLatitude: minLat, maxLatitude: maxLat, minLongitude: minLon, maxLongitude: maxLon }
+    // Now you can return the bounding box or destructure it as per your needs
+    const [minLongitude, minLatitude, maxLongitude, maxLatitude] = boundingBox;
+    return { minLatitude, maxLatitude, minLongitude, maxLongitude };
 }
