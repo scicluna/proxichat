@@ -54,7 +54,7 @@ const useGeolocation = () => {
         }
     }, [session]);
 
-    return { location, error };
+    return { location, setLocation, error };
 };
 
 export default useGeolocation;

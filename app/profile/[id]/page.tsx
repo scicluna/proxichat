@@ -35,7 +35,6 @@ export default function OtherProfile({ params }: OtherProfileProps) {
         setTimeout(() => {
             setLoading(false)
         }, 150)
-
     }, [loading])
 
     return (
@@ -45,7 +44,7 @@ export default function OtherProfile({ params }: OtherProfileProps) {
                 {loading ? (
                     <h1>Loading...</h1>
                 ) : (
-                    <h1>{user ? `${user?.username}'s Profile` : 'loading...'}</h1 >
+                    <h1>{user ? `${user?.username}'s Profile` : 'Loading...'}</h1 >
                 )
                 }
             </section>

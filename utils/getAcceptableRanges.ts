@@ -5,7 +5,7 @@ export default function getAcceptableRanges(range: number, lat: number, lon: num
 
     let newRange: number;
     if (range == 0) {
-        newRange = 1
+        newRange = .01
     } else newRange = range
 
     // Create the point from your longitude and latitude

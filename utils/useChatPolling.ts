@@ -36,6 +36,7 @@ export function useChatPolling(range: number, location: Location) {
         if (pendingChats) {
             const newChats = processedChats.filter((chat: Chat) => !pendingChats.some(pendingChat => pendingChat.tempId === chat.tempId))
             setChats([...pendingChats, ...newChats]);
+            setPendingChats([])
         } else {
             setChats(processedChats)
         }
@@ -58,17 +59,17 @@ export function useChatPolling(range: number, location: Location) {
             if (firstLoad && location) {
                 fetchChats()
                 setFirstLoad(false)
-            }
+            } else if (location) {
+                if (interval) {
+                    clearInterval(interval)
+                }
 
-            if (interval) {
-                clearInterval(interval)
+                timeoutId = setTimeout(() => {
+                    fetchChats()
+                    // Restart the interval after the debounced fetchChats call
+                    interval = setInterval(fetchChats, 5000) // Poll every 5 seconds
+                }, 200)
             }
-
-            timeoutId = setTimeout(() => {
-                fetchChats()
-                // Restart the interval after the debounced fetchChats call
-                interval = setInterval(fetchChats, 5000) // Poll every 5 seconds
-            }, 5000)
         }
 
         fetchChatsDebounced()
