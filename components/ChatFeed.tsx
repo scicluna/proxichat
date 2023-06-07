@@ -76,7 +76,7 @@ export default function ChatFeed({ range, location, chats }: ChatFeedProps) {
             ))}
             <div className="fixed bottom-10 right-2">
                 {newMessage && (
-                    <button className="text-gray-400 hover:text-black" onClick={scrollToBottom}>New!</button>
+                    <button className="text-green-500 hover:text-green-950 animate-bounce" onClick={scrollToBottom}>New!</button>
                 )}
             </div>
         </section>

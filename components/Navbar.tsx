@@ -17,8 +17,10 @@ export default function Navbar() {
 
     if (status === "loading") {
         return (
-            <nav className="h-12 p-1 mx-1 flex justify-between bg-gray-200 shadow-md shadow-gray-300">
-                <h1>"Loading..."</h1>
+            <nav className="h-12 p-1 mx-1 flex justify-center bg-gray-200 shadow-md shadow-gray-300">
+                <div className="h-full w-full flex flex-col justify-center items-center text-6xl mb-20 gap-5 text-center" >
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+                </div>
             </nav>
         )
     }

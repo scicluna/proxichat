@@ -34,15 +34,17 @@ export default function LoginPage() {
                 ?
                 Object.values(providers).map((provider) => (
                     <button type="button" key={provider.name} onClick={() => signIn(provider.id, { callbackUrl: "/chatroom" })}
-                        className="rounded-full border border-black bg-black py-5 px-5 text-white transition-all 
+                        className="rounded-full border border-black bg-black py-5 px-5 h-20 text-white transition-all 
                         hover:bg-white hover:text-black text-center flex items-center justify-center text-5xl">
                         Sign In
                     </button>
                 ))
                 :
-                <h1 className="rounded-full py-5 px-5 border-transparent border text-center flex items-center justify-center text-5xl">
-                    Loading...
-                </h1>}
+                (
+                    <div className="w-full flex flex-col justify-center items-center text-center h-20" >
+                        <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-green-500"></div>
+                    </div>
+                )}
         </div>
     )
 }

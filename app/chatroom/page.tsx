@@ -1,7 +1,7 @@
 'use client'
 import useGeolocation from "@/utils/useGeoLocation"
 import { useUserCount } from "@/utils/useUsers";
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Navbar from "@/components/Navbar";
 import ChatFeed from "@/components/ChatFeed";
 import ChatBar from "@/components/ChatBar";
@@ -14,13 +14,35 @@ export default function ChatRoom() {
     const [range, setRange] = useState<number>(5);
     const { userCount } = useUserCount(range, location);
     const { chats, changeChats } = useChatPolling(range, location!)
+    const [firstLoad, setFirstLoad] = useState(true);
 
-    if (!location) return (
+    useEffect(() => {
+        // Check if there is already a stored value for firstLoad
+        const storedFirstLoad = localStorage.getItem('firstLoad');
+
+        // If there is, parse it and use it as the new state value
+        if (storedFirstLoad !== null) {
+            setFirstLoad(JSON.parse(storedFirstLoad));
+        }
+    }, []);
+
+    useEffect(() => {
+        // Whenever firstLoad changes, update the stored value
+        localStorage.setItem('firstLoad', JSON.stringify(false));
+    }, [firstLoad]);
+
+    if (!location && firstLoad) return (
         <div className="h-full w-full flex flex-col justify-center items-center text-6xl mb-20 gap-5 text-center">
             <h1>Please activate location services to use Proxichat</h1>
             <button className="rounded-full border border-black bg-black py-5 px-5 text-white transition-all 
-                        hover:bg-white hover:text-black text-center flex items-center justify-center text-5xl"
+                        hover:bg-white hover:text-black text-center flex items-center justify-center text-2xl"
                 onClick={() => requestLocation()}>Activate Location</button>
+        </div>
+    )
+
+    if (!location || !chats) return (
+        <div className="h-full w-full flex flex-col justify-center items-center text-6xl mb-20 gap-5 text-center" >
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
         </div>
     )
 
