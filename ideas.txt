@@ -18,10 +18,16 @@
 18. Deployment (vercel?) - DONE
 19. Actual mobile phone testig
 20. Polish Phase 1 - DONE
-21. User Profile
+21. User Profile 
 22. FriendsList
 23. More responsive texts (when i send a text, i dont want to wait for a fetch. i want instant update) - DONE
 24. Lat/Lon fixed - DONE
 25. Debouncing fixed - DONE
 26. Authentication fix - DONE
 27. More precise geolocation - DONE
+28. User Profile --
+    Last logged on/logged in status
+    Thier last seen coords
+    Their number of posts
+    Their five last posts
+    

@@ -34,7 +34,7 @@ export function useChatPolling(range: number, location: Location) {
         const processedChats = await response.json();
 
         if (pendingChats) {
-            const newChats = processedChats.filter((chat: Chat) => !pendingChats.some(pendingChat => pendingChat.tempId === chat.tempId))
+            const newChats = processedChats.filter((chat: Chat) => !pendingChats.some(pendingChat => pendingChat.tempId === chat.tempId)).reverse()
             setChats([...pendingChats, ...newChats]);
             setPendingChats([])
         } else {

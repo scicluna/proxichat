@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: any) {
         const rangeChat = await Chat.find({
             latitude: { $gte: geoRanges.minLatitude, $lt: geoRanges.maxLatitude },
             longitude: { $gte: geoRanges.minLongitude, $lt: geoRanges.maxLongitude }
-        }).populate('author')
+        }).limit(200).populate('author').sort({ createdAt: 'desc' })
 
         if (!rangeChat) return new Response("No chats found for this range", { status: 404 })
 

@@ -21,8 +21,11 @@ const UserSchema = new Schema({
     },
     online: {
         type: Boolean
-    }
-});
+    },
+},
+    {
+        timestamps: true
+    });
 
 const User = models.User || model("User", UserSchema);
 export default User
