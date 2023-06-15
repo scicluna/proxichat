@@ -1,7 +1,7 @@
 'use client'
 import useGeolocation from "@/utils/useGeoLocation"
 import { useUserCount } from "@/utils/useUsers";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Navbar from "@/components/Navbar";
 import ChatFeed from "@/components/ChatFeed";
 import ChatBar from "@/components/ChatBar";
