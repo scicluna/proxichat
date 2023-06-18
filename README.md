@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Proxichat: The Real-Time Geo-Contextual Chat Application
+
+Proxichat is a real-time, serverless chat application that uses geolocation technology to create dynamic chatrooms. This application scales according to user's preferred geographic ranges, bringing a unique and localized chatting experience to its users.
+
+## Features
+Real-time communication: Messages are relayed in real-time, ensuring seamless and instantaneous communication.
+
+Geo-contextual chatrooms: Proxichat uses geolocation to create dynamic chatrooms. The range of these chatrooms scales according to the user's preferred geographic ranges.
+
+Serverless Architecture: Proxichat is built on a serverless architecture that ensures high availability, automatic scaling, and cost-effective deployment and operation.
+
+## Tech Stack
+Proxichat is built with a mix of powerful and scalable technologies:
+
+Frontend: The user interface of Proxichat is built with React, providing a dynamic and modern user experience.
+
+Backend: The backend is powered by NextJS, a React framework for production - it's fast, scalable, and serverless.
+
+Authentication: Proxichat uses NextAuth for secure authentication, ensuring that your chatrooms are protected and user data is secure.
+
+Database: MongoDB Atlas is used for reliable and scalable data storage.
+
+Geographic Calculations: Proxichat uses TurfJS for geographic radius calculations, ensuring accurate geolocation services.
 
 ## Getting Started
+To get Proxichat running locally on your machine, please follow the steps below:
 
-First, run the development server:
+Clone the repository to your local machine.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Install the dependencies by running npm install in your terminal.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set up the .env file with the necessary environment variables.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To start the development server, run npm run dev in your terminal.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Visit localhost:3000 in your browser to view the application.
 
-## Learn More
+## Contributions
+We welcome all kinds of contributions! Please feel free to contribute by opening issues, suggesting features, updating documentation, or even fixing bugs.
 
-To learn more about Next.js, take a look at the following resources:
+## License
+Proxichat is open-source and is licensed under the MIT License.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For any further questions, you can reach out to the creator directly. Happy coding!

@@ -1,8 +1,9 @@
 import { connectToDB } from "@/utils/database";
 import User from "@/models/User";
 import getAcceptableRanges from "@/utils/getAcceptableRanges";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
-export async function GET(request: Request, { params }: any) {
+export async function GET(request: Request, { params }: Params) {
     const { range, latitude, longitude } = params
 
     try {
