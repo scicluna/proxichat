@@ -10,25 +10,16 @@ import { useChatPolling } from "@/utils/useChatPolling";
 import { Chat } from "@/utils/useChatPolling";
 
 export default function ChatRoom() {
-    const { location, setLocation } = useGeolocation();
+    let { location, setLocation } = useGeolocation();
     const [range, setRange] = useState<number>(5);
     const { userCount } = useUserCount(range, location);
     const { chats, changeChats } = useChatPolling(range, location!)
-    const [firstLoad, setFirstLoad] = useState(true);
-
-    useEffect(() => {
-        // Check if there is already a stored value for firstLoad
-        const storedFirstLoad = localStorage.getItem('firstLoad');
-
-        // If there is, parse it and use it as the new state value
-        if (storedFirstLoad !== null) {
-            setFirstLoad(JSON.parse(storedFirstLoad));
-        }
-    }, []);
+    const [firstLoad, setFirstLoad] = useState(localStorage.getItem('firstLoad') || true);
 
     useEffect(() => {
         // Whenever firstLoad changes, update the stored value
         localStorage.setItem('firstLoad', JSON.stringify(false));
+        setFirstLoad(false)
     }, [firstLoad]);
 
     if (!location && firstLoad) return (
@@ -43,6 +34,7 @@ export default function ChatRoom() {
     if (!location || !chats) return (
         <div className="h-full w-full flex flex-col justify-center items-center text-6xl mb-20 gap-5 text-center" >
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+            <h1 className="text-3xl">Make sure your device has enabled location services!</h1>
         </div>
     )
 

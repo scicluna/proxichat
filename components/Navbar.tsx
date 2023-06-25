@@ -31,15 +31,15 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="h-12 p-1 mx-1 flex justify-between bg-gray-200 shadow-md shadow-gray-300">
+            <nav className="h-12 p-1 px-1 flex justify-between bg-gray-200 shadow-md shadow-gray-300">
                 <div className="flex">
                     <Link href={`/chatroom`}>
-                        <Image src='/assets/images/logo.webp' width={37} height={37} alt="logo" />
+                        <Image src='/assets/images/proxichatlogo.webp' priority width={40} height={40} alt="logo" />
                     </Link>
                 </div>
                 {session?.user && (
                     <div className="flex">
-                        <Image src={session.user.image!} width={37} height={37}
+                        <Image src={session.user.image!} width={40} height={40}
                             className="rounded-full hover:cursor-pointer" alt="profile" onClick={e => setDropDown(prev => !prev)} />
                         {dropDown && (
                             <div className='absolute z-10 right-2 top-8 mt-5 p-2 rounded-lg shadow-lg shadow-gray-300 bg-gray-200 outline-2 min-w-[120px] flex flex-col gap-1 justify-end items-end'>

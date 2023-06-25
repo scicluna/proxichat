@@ -28,7 +28,7 @@ export default function LoginPage() {
         <div className="flex flex-col gap-10 w-full h-full justify-center items-center pb-10 bg-gray-200">
             <div className="flex">
                 <h1 className="text-4xl">ProxiChat</h1>
-                <Image src='/assets/images/logo.webp' width={37} height={37} alt="logo" />
+                <Image src='/assets/images/proxichatlogo.webp' width={37} height={37} alt="logo" />
             </div>
             {(providers && !isSessionLoading)
                 ?

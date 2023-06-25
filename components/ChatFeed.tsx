@@ -65,11 +65,13 @@ export default function ChatFeed({ range, location, chats }: ChatFeedProps) {
                 <div key={i} ref={i === chats.length - 1 ? lastMessage : null}>
                     {chat?.author?.username
                         ?
-                        <Link href={`/profile/${chat?.author?._id}`}><b>{chat?.author?.username || '---User Deleted---'}</b>: {chat.chatbody}</Link>
+                        <div className="flex gap-2 text-gray-900">
+                            <Link href={`/profile/${chat?.author?._id}`}><b>{chat?.author?.username || '---User Deleted---'}</b>:</Link><p>{chat.chatbody}</p>
+                        </div>
                         :
-                        <>
+                        <div className="flex gap-2 text-gray-900">
                             <b>---User Deleted---</b> {chat.chatbody}
-                        </>
+                        </div>
                     }
 
                 </div>

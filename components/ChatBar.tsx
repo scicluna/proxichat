@@ -54,8 +54,8 @@ export default function ChatBar({ range, location, displayChats }: ChatBarProps)
     return (
         <section className="mt-auto p-1 shadow-sm shadow-gray-300">
             <form className="relative">
-                <input type="text" value={text} onChange={e => setText(e.target.value)} className="w-full shadow-md shadow-gray-400 p-1 bg-gray-100 bg-opacity-80" placeholder="Type..." />
-                <button type="submit" onClick={submitChat} className="absolute p-0 right-1 bottom-1 text-gray-400 hover:text-gray-900 w-5">{'>'}</button>
+                <input type="text" value={text} onChange={e => setText(e.target.value)} className="w-full shadow-md shadow-gray-400 p-2 bg-slate-150 bg-opacity-80" placeholder="Type..." />
+                <button type="submit" onClick={submitChat} className="absolute p-0 right-2 bottom-0 text-gray-400 hover:text-gray-900 w-5 text-4xl">{'>'}</button>
             </form>
         </section>
     )
