@@ -13,12 +13,10 @@ const useGeolocation = () => {
     const { data: session } = useSession()
 
     const handleSuccess = async (position: GeolocationPosition) => {
-
         const newLocation: Location = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         }
-
         setLocation(newLocation);
 
         if (session) {
@@ -29,23 +27,19 @@ const useGeolocation = () => {
                 },
                 body: JSON.stringify({ email: session.user?.email, newLocation })
             })
-
             if (!response.ok) {
                 console.error('Failed to update location')
             }
         }
     };
-
     const handleError = () => {
         setError('Unable to retrieve your location');
     };
-
     const options = {
         enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0,
     };
-
     useEffect(() => {
         if (!navigator.geolocation) {
             setError('Geolocation is not supported by your browser');
@@ -53,7 +47,6 @@ const useGeolocation = () => {
             navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
         }
     }, [session]);
-
     return { location, setLocation, error };
 };
 

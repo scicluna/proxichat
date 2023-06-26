@@ -15,7 +15,6 @@ declare module "next-auth" {
         };
     }
 }
-
 const handler = NextAuth({
     providers: [
         GoogleProvider({
@@ -61,5 +60,4 @@ const handler = NextAuth({
         }
     },
 })
-
 export { handler as GET, handler as POST }

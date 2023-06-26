@@ -13,10 +13,8 @@ export function useUserCount(range: number, location: Location | null) {
             setUserCount(users.length)
         }
     }
-
     useEffect(() => {
         let timeoutId: NodeJS.Timeout | null = null
-
         const fetchWithDelay = () => {
             if (timeoutId) {
                 clearTimeout(timeoutId)
@@ -30,15 +28,11 @@ export function useUserCount(range: number, location: Location | null) {
         } else {
             setError('Unable to retrieve users')
         }
-
         return () => {
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
         };
-
     }, [range, location])
-
-
     return { userCount, error }
 }

@@ -11,7 +11,6 @@ export type Author = {
     longitude: number
     online: Boolean
 }
-
 export type Chat = {
     tempId: string
     author: Author
@@ -32,7 +31,6 @@ export function useChatPolling(range: number, location: Location) {
     async function fetchChats() {
         const response = await fetch(`/api/chats/${range}/${location.latitude}/${location.longitude}`);
         const processedChats = await response.json();
-
         if (pendingChats) {
             const newChats = processedChats.filter((chat: Chat) => !pendingChats.some(pendingChat => pendingChat.tempId === chat.tempId)).reverse()
             setChats([...pendingChats, ...newChats]);
@@ -67,15 +65,12 @@ export function useChatPolling(range: number, location: Location) {
                 timeoutId = setTimeout(() => {
                     fetchChats()
                     // Restart the interval after the debounced fetchChats call
-                    interval = setInterval(fetchChats, 5000) // Poll every 5 seconds
+                    interval = setInterval(fetchChats, 5000)
                 }, 200)
             }
         }
-
         fetchChatsDebounced()
-
         return () => {
-            // Clear any pending timeout or interval on cleanup
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
@@ -84,7 +79,6 @@ export function useChatPolling(range: number, location: Location) {
             }
         }
     }
-
 
     useEffect(() => {
         const stopPolling = startPolling()

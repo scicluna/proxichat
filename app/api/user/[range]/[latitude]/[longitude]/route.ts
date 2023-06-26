@@ -5,7 +5,6 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function GET(request: Request, { params }: Params) {
     const { range, latitude, longitude } = params
-
     try {
         await connectToDB()
         const geoRanges = getAcceptableRanges(parseFloat(range), parseFloat(latitude), parseFloat(longitude))
@@ -14,7 +13,6 @@ export async function GET(request: Request, { params }: Params) {
             latitude: { $gte: geoRanges.minLatitude, $lt: geoRanges.maxLatitude },
             longitude: { $gte: geoRanges.minLongitude, $lt: geoRanges.maxLongitude }
         })
-
         if (!users) return new Response("No users found for this range", { status: 404 })
 
         const onlineUsers = users.filter(user => user.online == true)

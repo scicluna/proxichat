@@ -14,7 +14,6 @@ export async function POST(req: Request) {
             longitude: location.longitude,
             chatbody: text
         })
-
         return new Response(JSON.stringify(response), { status: 200 })
     } catch (err) {
         return new Response('Failed to post chat', { status: 500 })

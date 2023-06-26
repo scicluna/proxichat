@@ -27,7 +27,6 @@ export default function ChatRoom() {
             changeChats([...chats!, chat])
         }
     }
-
     return (
         <>
             <Navbar />

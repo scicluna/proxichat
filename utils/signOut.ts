@@ -10,6 +10,5 @@ export async function signOutUser(session: Session) {
         },
         body: JSON.stringify({ session })
     })
-
     signOut({ callbackUrl: '/' })
 }

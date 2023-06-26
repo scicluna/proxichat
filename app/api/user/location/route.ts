@@ -10,7 +10,6 @@ export async function POST(req: Request) {
         const user = await User.findOne({
             email: email
         })
-
         user.latitude = newLocation.latitude
         user.longitude = newLocation.longitude
         user.online = true

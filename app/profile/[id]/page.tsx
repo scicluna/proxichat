@@ -34,7 +34,6 @@ export default async function OtherProfile({ params }: OtherProfileProps) {
         const d = newDate.getDate()
         return `${m}/${d}/${y} at ${h}:${i}`
     }
-
     return (
         <>
             <Navbar />

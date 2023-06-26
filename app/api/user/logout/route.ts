@@ -10,7 +10,6 @@ export async function POST(req: Request) {
         const user = await User.findOne({
             email: session.user.email
         })
-
         user.online = false
         await user.save()
         return new Response(JSON.stringify(user), { status: 200 })

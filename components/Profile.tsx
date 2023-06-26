@@ -14,7 +14,6 @@ export default function Profile() {
         }
     })
     const [dropDown, setDropDown] = useState(false)
-
     return (
         <>
             {session?.user && (

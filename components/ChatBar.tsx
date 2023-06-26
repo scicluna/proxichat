@@ -17,11 +17,9 @@ export default function ChatBar({ range, location, displayChats }: ChatBarProps)
 
     async function submitChat(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
-
         if (!text) return
 
         const tempId = uuidv4()
-        // Create a new chat message
         const newChat: Chat = {
             tempId: tempId,
             author: { _id: session!.user!.id!, username: session!.user!.name!, image: session!.user!.image!, latitude: location.latitude, longitude: location.longitude, online: true },
@@ -31,12 +29,10 @@ export default function ChatBar({ range, location, displayChats }: ChatBarProps)
             created_at: new Date(),
             updated_at: new Date()
         };
-
         // Add the new chat message to local state
         displayChats(newChat)
         setText('')
 
-        //post request to submit the new chat
         const response = await fetch('/api/chats', {
             method: 'POST',
             headers: {
@@ -44,13 +40,10 @@ export default function ChatBar({ range, location, displayChats }: ChatBarProps)
             },
             body: JSON.stringify({ session, location, text, tempId })
         })
-
         if (!response.ok) {
             console.error('Failed to chat')
         }
-
     }
-
     return (
         <section className="mt-auto p-1 shadow-sm shadow-gray-300">
             <form className="relative">

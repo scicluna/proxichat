@@ -26,7 +26,6 @@ export default function ChatFeed({ range, location, chats }: ChatFeedProps) {
         }, 100)
     }, [loading])
 
-
     useEffect(() => {
         if (!chatContainer.current || !chats) return;
 
@@ -58,7 +57,6 @@ export default function ChatFeed({ range, location, chats }: ChatFeedProps) {
             setNewMessage(false)
         }
     }
-
     return (
         <section className="h-full overflow-y-scroll scrollbar-hide p-1 mx-1 shadow-md shadow-gray-300 bg-gray-100 relative" ref={chatContainer}>
             {chats && chats.map((chat, i) => (

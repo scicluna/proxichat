@@ -4,7 +4,6 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function GET(request: Request, { params }: Params) {
     const { id } = params
-
     await connectToDB();
     try {
         const user = await User.findById(id);

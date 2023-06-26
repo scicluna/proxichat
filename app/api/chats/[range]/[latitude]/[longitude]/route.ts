@@ -4,7 +4,6 @@ import getAcceptableRanges from "@/utils/getAcceptableRanges";
 
 export async function GET(request: Request, { params }: any) {
     const { range, latitude, longitude } = params
-
     try {
         await connectToDB()
         const geoRanges = getAcceptableRanges(parseFloat(range), parseFloat(latitude), parseFloat(longitude))
