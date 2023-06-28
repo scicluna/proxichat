@@ -18,7 +18,7 @@ export type User = {
 }
 
 async function getUser(id: string) {
-    const response = await fetch(`${process.env.URL}/api/profile/${id}`)
+    const response = await fetch(`${process.env.URL}/api/profile/${id}`, { cache: "no-store" })
     return await response.json()
 }
 
