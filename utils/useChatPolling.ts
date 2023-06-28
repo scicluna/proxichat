@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { Location } from './useGeoLocation';
 
@@ -24,7 +24,7 @@ export type Chat = {
 export function useChatPolling(range: number, location: Location) {
     const [chats, setChats] = useState<Chat[] | null>([]);
     const [firstLoad, setFirstLoad] = useState(true)
-    const [error, setError] = useState<String | null>(null);
+    const [error] = useState<String | null>(null);
     const { data: session } = useSession();
     const [pendingChats, setPendingChats] = useState<Chat[] | null>([])
 

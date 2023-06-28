@@ -41,4 +41,4 @@ We welcome all kinds of contributions! Please feel free to contribute by opening
 ## License
 Proxichat is open-source and is licensed under the MIT License.
 
-For any further questions, you can reach out to the creator directly. Happy coding!
+For any further questions, you can reach out to the me directly. Happy coding!
